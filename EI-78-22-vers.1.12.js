@@ -211,6 +211,8 @@
 
 })(jQuery)
 
+21,
+86
 
 function validateDuplicateImportCodes(values) {
     // Initialize variables

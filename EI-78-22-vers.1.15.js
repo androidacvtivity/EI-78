@@ -310,7 +310,7 @@ function validateDuplicateExportCodes(values) {
                 'fieldName': 'CAP1_R_C31',
                 'index': i,
                 'msg': Drupal.t(
-                    `Cod eroare: 44-0030, Cap. Import. Codul CSPM Rev.2 și codul CITLT se repetă pentru: ${combinedCode}`
+                    `Cod eroare: 44-0023, Cap. Export. Codul CSPM Rev.2 și codul CITLT se repetă pentru: ${combinedCode}`
                 )
             });
 
@@ -318,7 +318,7 @@ function validateDuplicateExportCodes(values) {
                 'fieldName': 'CAP1_R_C33',
                 'index': i,
                 'msg': Drupal.t(
-                    `Cod eroare: 44-0030, Cap. Import. Codul CSPM Rev.2 și codul CITLT se repetă pentru: ${combinedCode}`
+                    `Cod eroare: 44-0023, Cap. Export. Codul CSPM Rev.2 și codul CITLT se repetă pentru: ${combinedCode}`
                 )
             });
 
@@ -326,7 +326,7 @@ function validateDuplicateExportCodes(values) {
                 'fieldName': 'CAP1_R_CI',
                 'index': i,
                 'msg': Drupal.t(
-                    `Cod eroare: 44-0030, Cap. Import. Codul CSPM Rev.2 și codul CITLT se repetă pentru: ${combinedCode}`
+                    `Cod eroare: 44-0023, Cap. Export. Codul CSPM Rev.2 și codul CITLT se repetă pentru: ${combinedCode}`
                 )
             });
 
@@ -334,7 +334,7 @@ function validateDuplicateExportCodes(values) {
                 'fieldName': 'CAP2_1_CC',
                 'index': i,
                 'msg': Drupal.t(
-                    `Cod eroare: 44-0030, Cap. Import. Codul CSPM Rev.2 și codul CITLT se repetă pentru: ${combinedCode}`
+                    `Cod eroare: 44-0023, Cap. Export. Codul CSPM Rev.2 și codul CITLT se repetă pentru: ${combinedCode}`
                 )
             });
 
