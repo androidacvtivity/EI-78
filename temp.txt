@@ -1,0 +1,3 @@
+Analizeaza fisierile si dupa exempele care le-am facut anterior 
+modifica validarea 44-0030 . In 'msg': Drupal.t('Cod eroare: 44-0030, Cap. Import. Codul CSPM Rev.2  si codul  CITLT se repeta.') trebuie sa fie 
+afisate si serviciiListCountryImport - care se repeta.  
