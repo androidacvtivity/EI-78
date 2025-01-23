@@ -23,6 +23,10 @@
         for (var i = 0; i < values.CAP1_R_CI.length; i++) {
             serviciiListCountryExport[i] = values.CAP1_R_C31[i] + '_' + values.CAP1_R_C33[i]; //values.CAP1_R_C31[i].concat(values.CAP1_R_C3[i]);
         }
+
+
+
+        
         for (var i = 0; i < values.CAP2_R_CI.length; i++) {
             serviciiListCountryImport[i] = values.CAP2_R_C31[i] + '_' + values.CAP2_R_C33[i]; //values.CAP1_R_C31[i].concat(values.CAP1_R_C3[i]);
         }

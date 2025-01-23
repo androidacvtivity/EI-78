@@ -14,13 +14,21 @@
         var getMonth = parseInt(jQuery('#TRIM').val());
 
 
-            // Call the separate function for 44-0030 validation
-    const importValidationError = validateDuplicateImportCodes(values);
+    //         // Call the separate function for 44-0030 validation
+     // const importValidationError = validateDuplicateImportCodes(values);
 
-    // Add error to webform.errors if validation fails
-    if (importValidationError) {
-        webform.errors.push(importValidationError);
-    }
+    // // Add error to webform.errors if validation fails
+    // if (importValidationError) {
+    //     webform.errors.push(importValidationError);
+    // }
+
+        // Call the function for 44-0030 validation
+        const importValidationErrors = validateDuplicateImportCodes(values);
+
+        // Push errors to webform.errors if validation fails
+        if (importValidationErrors) {
+            importValidationErrors.forEach(error => webform.errors.push(error));
+        }
 
         var servicii = 0;
         var tari = 0;
@@ -211,45 +219,65 @@
 
 })(jQuery)
 
+21,
+86
 
 function validateDuplicateImportCodes(values) {
-    // Initialize variables
+    // Initialize an array to store errors
+    let errors = [];
     let serviciiListCountryImport = [];
 
-    // Construct the list with validation for missing data
+    // Loop through each row in CAP2_R_CI
     for (let i = 0; i < values.CAP2_R_CI.length; i++) {
+        // Safely extract CSPM and CITLT codes with fallback for missing data
         let cspmCode = values.CAP2_R_C31[i] || "Unknown CSPM";
         let citltCode = values.CAP2_R_C33[i] || "Unknown CITLT";
-        serviciiListCountryImport.push({
-            code: cspmCode + '_' + citltCode,
-            rowIndex: i + 1 // Save the row index (1-based for user clarity)
-        });
-    }
+        let combinedCode = cspmCode + '_' + citltCode;
 
-    // Sort and identify duplicates
-    serviciiListCountryImport.sort((a, b) => a.code.localeCompare(b.code));
-    let duplicates = [];
-    for (let i = 0; i < serviciiListCountryImport.length - 1; i++) {
-        if (serviciiListCountryImport[i].code === serviciiListCountryImport[i + 1].code) {
-            duplicates.push(serviciiListCountryImport[i]);
+        // Check if the combined code already exists in the list
+        if (serviciiListCountryImport.includes(combinedCode)) {
+            // If it exists, add an error for this row
+            errors.push({
+                'fieldName': 'CAP2_R_C31',
+                'index': i,
+                'msg': Drupal.t(
+                    `Cod eroare: 44-0030, Cap. Import. Codul CSPM Rev.2 și codul CITLT se repetă pentru: ${combinedCode}`
+                )  
+            });
+
+            errors.push({
+                'fieldName': 'CAP2_R_C33',
+                'index': i,
+                'msg': Drupal.t(
+                    `Cod eroare: 44-0030, Cap. Import. Codul CSPM Rev.2 și codul CITLT se repetă pentru: ${combinedCode}`
+                )
+            });
+
+            errors.push({
+                'fieldName': 'CAP2_R_CI',
+                'index': i,
+                'msg': Drupal.t(
+                    `Cod eroare: 44-0030, Cap. Import. Codul CSPM Rev.2 și codul CITLT se repetă pentru: ${combinedCode}`
+                )
+            });
+
+            errors.push({
+                'fieldName': 'CAP2_R_CC',
+                'index': i,
+                'msg': Drupal.t(
+                    `Cod eroare: 44-0030, Cap. Import. Codul CSPM Rev.2 și codul CITLT se repetă pentru: ${combinedCode}`
+                )
+            });
+
+
+
         }
+
+        // Add the current combined code to the list for tracking
+        serviciiListCountryImport.push(combinedCode);
     }
 
-    // Remove invalid duplicates (e.g., "Unknown CSPM_Unknown CITLT")
-    duplicates = duplicates.filter(item => item.code !== "Unknown CSPM_Unknown CITLT");
-
-    // Return validation errors for each duplicate row
-    let errors = [];
-    duplicates.forEach(duplicate => {
-        errors.push({
-            'fieldName': `CAP2_R_CI_${duplicate.rowIndex}`, // Include the row index in the field name
-            'msg': Drupal.t(
-                `Cod eroare: 44-0030, Cap. Import. Codul CSPM Rev.2 și codul CITLT se repetă pentru: ${duplicate.code}`
-            )
-        });
-    });
-
-    // Return errors or null if no duplicates
+    // Return the array of errors or null if no duplicates found
     return errors.length > 0 ? errors : null;
 }
 
